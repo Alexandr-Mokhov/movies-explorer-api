@@ -5,4 +5,4 @@ const config = require('./config');
 const app = express();
 mongoose.connect(config.mongodbLink);
 
-app.listen(config.port, () => console.log(`Работает ${config.port}`));
+app.listen(config.port, () => console.log(`Работает на порту ${config.port}`));
