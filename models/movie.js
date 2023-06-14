@@ -55,15 +55,15 @@ const movieSchema = new mongoose.Schema({
       protocols: ['http', 'https'],
     },
   },
-  owner: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: 'user',
-  },
-  movieId: {
-    type: Number,
-    required: true,
-  },
+  // owner: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   required: true,
+  //   ref: 'user',
+  // },
+  // movieId: {
+  //   type: Number,
+  //   required: true,
+  // },
   nameRU: {
     type: String,
     required: true,
