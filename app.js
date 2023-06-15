@@ -5,8 +5,12 @@ const config = require('./config');
 const router = require('./routes/index');
 const handleErrors = require('./utils/handleErrors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const limiter = require('./middlewares/rateLimit');
+const { corsMiddlewares } = require('./middlewares/corsMiddlewares');
 
 const app = express();
+app.use(corsMiddlewares);
+app.use(limiter);
 mongoose.connect(config.mongodbLink);
 app.use(express.json());
 app.use(requestLogger);

@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const userModel = require('../models/user');
 const { OK_STATUS, CREATED_STATUS } = require('../statusCodes');
 const AuthorisationError = require('../errors/AuthorisationError');
+const { devSecret } = require('../config');
 
 const getUser = (req, res, next) => {
   const { _id } = req.user;
@@ -52,7 +53,7 @@ const login = (req, res, next) => {
           }
           const token = jwt.sign(
             { _id: user._id },
-            NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+            NODE_ENV === 'production' ? JWT_SECRET : devSecret,
             { expiresIn: '7d' },
           );
           return res.send({ token });
