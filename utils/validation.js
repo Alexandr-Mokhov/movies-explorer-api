@@ -78,6 +78,12 @@ const movieCreateValidation = celebrate({
         'string.pattern.base': 'Поле миниатюра должно соответствовать ссылке',
         'any.required': 'Поле миниатюра обязательное поле',
       }),
+    movieId: Joi.number().required()
+      .messages({
+        'string.base': 'Поле id-фильма должно быть числом',
+        'string.empty': 'Поле id-фильма не должно быть пустым',
+        'any.required': 'Поле id-фильма обязательное поле',
+      }),
     nameRU: Joi.string().regex(nameRuPattern).required()
       .messages({
         'string.base': 'Поле имя должно быть текстом',
@@ -107,8 +113,55 @@ const movieIdValidation = celebrate({
   }),
 });
 
+const registrationValidation = celebrate({
+  body: Joi.object().keys({
+    email: Joi.string().email().required()
+      .messages({
+        'string.base': 'Поле email должно быть текстом',
+        'string.empty': 'Поле email не должно быть пустым',
+        'string.email': 'В поле email должен быть email',
+        'any.required': 'email это обязательное поле',
+      }),
+    password: Joi.string().min(4).required()
+      .messages({
+        'string.base': 'Пароль должен быть текстом',
+        'string.empty': 'Пароль не должен быть пустым',
+        'string.min': 'Минимальная длина Пароля 4 знака',
+        'any.required': 'Пароль это обязательное поле',
+      }),
+    name: Joi.string().min(2).max(30)
+      .messages({
+        'string.base': 'Имя должно быть текстом',
+        'string.empty': 'Имя не должно быть пустым',
+        'string.min': 'Минимальная длина имени 2 знака',
+        'string.max': 'Максимальная длина имени 30 знаков',
+      }),
+  }),
+});
+
+const loginValidation = celebrate({
+  body: Joi.object().keys({
+    email: Joi.string().email().required()
+      .messages({
+        'string.base': 'Поле email должно быть текстом',
+        'string.empty': 'Поле email не должно быть пустым',
+        'string.email': 'В поле email должен быть email',
+        'any.required': 'email это обязательное поле',
+      }),
+    password: Joi.string().min(4).required()
+      .messages({
+        'string.base': 'Пароль должен быть текстом',
+        'string.empty': 'Пароль не должен быть пустым',
+        'string.min': 'Минимальная длина Пароля 4 знака',
+        'any.required': 'Пароль это обязательное поле',
+      }),
+  }),
+});
+
 module.exports = {
   userValidation,
   movieCreateValidation,
   movieIdValidation,
+  registrationValidation,
+  loginValidation,
 };
