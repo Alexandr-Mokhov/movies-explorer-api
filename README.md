@@ -13,4 +13,6 @@
 `npm run start` — запускает сервер   
 `npm run dev` — запускает сервер с hot-reload
 
+* Домен бэкенда: api.diploma.mokhov.nomoredomains.rocks
+
 * [Ссылка на репозиторий проекта](https://github.com/Alexandr-Mokhov/movies-explorer-api)
