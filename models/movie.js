@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const { messageInvalidUrl } = require('../constants');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -27,7 +28,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (v) => validator.isURL(v),
-      message: 'Некорректный URL',
+      message: messageInvalidUrl,
       require_protocol: true,
       require_valid_protocol: true,
       protocols: ['http', 'https'],
@@ -38,7 +39,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (v) => validator.isURL(v),
-      message: 'Некорректный URL',
+      message: messageInvalidUrl,
       require_protocol: true,
       require_valid_protocol: true,
       protocols: ['http', 'https'],
@@ -49,7 +50,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (v) => validator.isURL(v),
-      message: 'Некорректный URL',
+      message: messageInvalidUrl,
       require_protocol: true,
       require_valid_protocol: true,
       protocols: ['http', 'https'],

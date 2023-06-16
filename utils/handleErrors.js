@@ -3,27 +3,41 @@ const BadRequestError = require('../errors/BadRequestError');
 const ConflictingRequestError = require('../errors/ConflictingRequestError');
 const ForbiddenError = require('../errors/ForbiddenError');
 const NotFoundError = require('../errors/NotFoundError');
+const {
+  messageConflictingRequestError,
+  messageNotFoundResource,
+  messageBadRequestError,
+  messageInternalServerError,
+} = require('../constants');
 
-function handleErrors(err) {
+function handleErrors(err, res) {
+  const { statusCode = 500, message } = err;
+
+  function sendError(error) {
+    return res.status(error.statusCode).send({ message: error.message });
+  }
+
   if (err instanceof AuthorisationError
     || err instanceof ForbiddenError
     || err instanceof NotFoundError) {
-    return err;
+    return res.status(statusCode).send({ message });
   }
 
   if (err.code === 11000) {
-    return new ConflictingRequestError('Такой E-mail уже зарегистрирован.');
+    sendError(new ConflictingRequestError(messageConflictingRequestError));
   }
 
   if (err.name === 'DocumentNotFoundError') {
-    return new NotFoundError('Ресурс с указанным id не найден.');
+    sendError(new NotFoundError(messageNotFoundResource));
   }
 
   if (err.name === 'ValidationError' || err.name === 'CastError') {
-    return new BadRequestError('Переданы некорректные данные.');
+    sendError(new BadRequestError(messageBadRequestError));
   }
 
-  return { statusCode: 500 };
+  return res.status(statusCode).send({
+    message: statusCode === 500 ? messageInternalServerError : message,
+  });
 }
 
 module.exports = handleErrors;
