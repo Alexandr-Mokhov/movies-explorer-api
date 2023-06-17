@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const { NODE_ENV, NOMGODB_LINK_PRODUCTION } = process.env;
 const express = require('express');
 const mongoose = require('mongoose');
