@@ -1,9 +1,9 @@
+/* eslint-disable no-useless-escape */
 const { celebrate, Joi } = require('celebrate');
 
-// eslint-disable-next-line no-useless-escape
 const linkPattern = /https?:\/\/[\w\-\.\_\~\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=\#]{1,}/;
-const nameRuPattern = /[А-ЯЁа-яё \d]/;
-const nameEnPattern = /^[\w ]+$/;
+const nameRuPattern = /[А-ЯЁа-яё \w\-\.\_\~\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=]+/;
+const nameEnPattern = /^[\w \-\.\_\~\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=]+$/;
 
 const userValidation = celebrate({
   body: Joi.object().keys({
