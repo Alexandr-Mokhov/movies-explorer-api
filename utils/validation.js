@@ -2,8 +2,8 @@
 const { celebrate, Joi } = require('celebrate');
 
 const linkPattern = /https?:\/\/[\w\-\.\_\~\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=\#]{1,}/;
-const nameRuPattern = /[А-ЯЁа-яё \w\-\.\_\~\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=]+/;
-const nameEnPattern = /^[\w \-\.\_\~\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=]+$/;
+const nameRuPattern = /[А-ЯЁа-яё \w\-\–\.\_\~\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=]+/;
+const nameEnPattern = /^[\w \-\–\.\_\~\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=]+$/;
 
 const userValidation = celebrate({
   body: Joi.object().keys({
