@@ -1,10 +1,6 @@
 /* eslint-disable no-useless-escape */
 const { celebrate, Joi } = require('celebrate');
 
-const linkPattern = /https?:\/\/[\w\-\.\_\~\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=\#]{1,}/;
-const nameRuPattern = /[А-ЯЁа-яё \w\-\–\.\_\~\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=]+/;
-const nameEnPattern = /^[\w \-\–\.\_\~\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=]+$/;
-
 const userValidation = celebrate({
   body: Joi.object().keys({
     email: Joi.string().email().required(),
@@ -19,12 +15,12 @@ const movieCreateValidation = celebrate({
     duration: Joi.number().required(),
     year: Joi.string().required(),
     description: Joi.string().required(),
-    image: Joi.string().regex(linkPattern).required(),
-    trailerLink: Joi.string().regex(linkPattern).required(),
-    thumbnail: Joi.string().regex(linkPattern).required(),
+    image: Joi.string().required(),
+    trailerLink: Joi.string().required(),
+    thumbnail: Joi.string().required(),
     movieId: Joi.number().required(),
-    nameRU: Joi.string().regex(nameRuPattern).required(),
-    nameEN: Joi.string().regex(nameEnPattern).required(),
+    nameRU: Joi.string().required(),
+    nameEN: Joi.string().required(),
   }),
 });
 
