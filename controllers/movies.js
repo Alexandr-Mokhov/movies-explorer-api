@@ -1,6 +1,6 @@
 const movieModel = require('../models/movie');
 const ForbiddenError = require('../errors/ForbiddenError');
-const { OK_STATUS, CREATED_STATUS, messageForbiddenError } = require('../constants');
+const { OK_STATUS, CREATED_STATUS, MESSAGE_FORBIDDEN_ERROR } = require('../constants');
 
 const getMovies = (req, res, next) => {
   movieModel.find({})
@@ -44,7 +44,7 @@ const deleteMovie = (req, res, next) => {
           .then((movieDelete) => res.status(OK_STATUS).send(movieDelete))
           .catch(next);
       }
-      return Promise.reject(new ForbiddenError(messageForbiddenError));
+      return Promise.reject(new ForbiddenError(MESSAGE_FORBIDDEN_ERROR));
     })
     .catch(next);
 };

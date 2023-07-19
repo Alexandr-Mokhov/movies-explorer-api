@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const userModel = require('../models/user');
 const AuthorisationError = require('../errors/AuthorisationError');
 const { devSecret } = require('../config');
-const { OK_STATUS, CREATED_STATUS, messageAuthorisationError } = require('../constants');
+const { OK_STATUS, CREATED_STATUS, MESSAGE_AUTHORISATION_ERROR } = require('../constants');
 
 const getUser = (req, res, next) => {
   const { _id } = req.user;
@@ -44,12 +44,12 @@ const login = (req, res, next) => {
   userModel.findOne({ email }).select('+password')
     .then((user) => {
       if (!user) {
-        return Promise.reject(new AuthorisationError(messageAuthorisationError));
+        return Promise.reject(new AuthorisationError(MESSAGE_AUTHORISATION_ERROR));
       }
       return bcrypt.compare(password, user.password)
         .then((matched) => {
           if (!matched) {
-            return Promise.reject(new AuthorisationError(messageAuthorisationError));
+            return Promise.reject(new AuthorisationError(MESSAGE_AUTHORISATION_ERROR));
           }
           const token = jwt.sign(
             { _id: user._id },

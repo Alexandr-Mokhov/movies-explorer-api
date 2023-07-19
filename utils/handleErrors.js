@@ -4,10 +4,10 @@ const ConflictingRequestError = require('../errors/ConflictingRequestError');
 const ForbiddenError = require('../errors/ForbiddenError');
 const NotFoundError = require('../errors/NotFoundError');
 const {
-  messageConflictingRequestError,
-  messageNotFoundResource,
-  messageBadRequestError,
-  messageInternalServerError,
+  MESSAGE_CONFLICTING_REQUEST_ERROR,
+  MESSAGE_NOT_FOUND_RESOURCE,
+  MESSAGE_BAD_REQUEST_ERROR,
+  MESSAGE_INTERNAL_SERVER_ERROR,
 } = require('../constants');
 
 function handleErrors(err, res) {
@@ -24,19 +24,19 @@ function handleErrors(err, res) {
   }
 
   if (err.code === 11000) {
-    sendError(new ConflictingRequestError(messageConflictingRequestError));
+    sendError(new ConflictingRequestError(MESSAGE_CONFLICTING_REQUEST_ERROR));
   }
 
   if (err.name === 'DocumentNotFoundError') {
-    sendError(new NotFoundError(messageNotFoundResource));
+    sendError(new NotFoundError(MESSAGE_NOT_FOUND_RESOURCE));
   }
 
   if (err.name === 'ValidationError' || err.name === 'CastError') {
-    sendError(new BadRequestError(messageBadRequestError));
+    sendError(new BadRequestError(MESSAGE_BAD_REQUEST_ERROR));
   }
 
   return res.status(statusCode).send({
-    message: statusCode === 500 ? messageInternalServerError : message,
+    message: statusCode === 500 ? MESSAGE_INTERNAL_SERVER_ERROR : message,
   });
 }
 
